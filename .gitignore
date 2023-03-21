@@ -1,4 +1,4 @@
-/ML_PRO/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -110,7 +110,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+.ML_PRO/
 # Spyder project settings
 .spyderproject
 .spyproject

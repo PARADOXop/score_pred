@@ -36,6 +36,3 @@ class data_ingestion():
         except Exception as e:
             raise CustomException(e, sys)
 
-if __name__ == "__main__":
-    obj = data_ingestion()
-    obj.initiate_data_ingestion()

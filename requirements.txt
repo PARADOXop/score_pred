@@ -4,4 +4,6 @@ numpy
 dill 
 typing
 scikit-learn
+xgboost
+catboost
 -e .

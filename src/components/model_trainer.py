@@ -1,17 +1,22 @@
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression, Lasso, Ridge
-from sklearn.metrics import r2_score
 import os
 import sys
+from dataclasses import dataclass
+
+from catboost import CatBoostRegressor
+from sklearn.ensemble import (
+    AdaBoostRegressor,
+    GradientBoostingRegressor,
+    RandomForestRegressor,
+)
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
-from src.logger import logging
-from catboost import CatBoostRegressor
-from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, GradientBoostingRegressor
+
 from src.exception import CustomException
-from dataclasses import dataclass
+from src.logger import logging
+
 from src.utils import save_object,evaluate_models
 
 @dataclass
@@ -24,6 +29,7 @@ class ModelTrainer:
 
 
     def initiate_model_trainer(self,train_array,test_array):
+        # sourcery skip: raise-from-previous-error
         try:
             logging.info("Split training and test input data")
             X_train,y_train,X_test,y_test=(
@@ -49,7 +55,7 @@ class ModelTrainer:
                 },
                 "Random Forest":{
                     # 'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
-                 
+
                     # 'max_features':['sqrt','log2',None],
                     'n_estimators': [8,16,32,64,128,256]
                 },
@@ -76,11 +82,12 @@ class ModelTrainer:
                     # 'loss':['linear','square','exponential'],
                     'n_estimators': [8,16,32,64,128,256]
                 }
-                
+
             }
 
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
                                              models=models,param=params)
+
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
 
@@ -104,4 +111,4 @@ class ModelTrainer:
 
             return r2_score(y_test, predicted)
         except Exception as e:
-            raise CustomException(e,sys) from e
+            raise CustomException(e,sys)

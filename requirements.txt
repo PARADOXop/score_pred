@@ -6,4 +6,6 @@ typing
 scikit-learn
 xgboost
 catboost
+pickel
+flask
 -e .

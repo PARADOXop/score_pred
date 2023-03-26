@@ -112,7 +112,7 @@ env.bak/
 venv.bak/
 .ML_PRO/
 notebook/
-artifacts/
+
 
 
 # Spyder project settings

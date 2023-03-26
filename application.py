@@ -37,30 +37,7 @@ def predict_datapoint():
     results=predict_pipeline.predict(pred_df)
     print(results)
     return render_template('home.html',results=results[0])
-    
-@app.route('/postman',methods=['GET','POST'])
-def haanji():
-    if request.method=='GET':
-        return 'kuch nahi hai mere pass'
-    data=CustomData(
-        gender=request.json['gender'],
-        race_ethnicity=request.json['ethnicity'],
-        parental_level_of_education=request.json['parental_level_of_education'],
-        lunch=request.json['lunch'],
-        test_preparation_course=request.json['test_preparation_course'],
-        reading_score=int(request.json['writing_score']),
-        writing_score=int(request.json['reading_score'])
-
-    )
-    print(1)
-    pred_df=data.get_data_as_data_frame()
-    print(pred_df)
-
-    predict_pipeline=PredictPipeline()
-    
-    results=predict_pipeline.predict(pred_df)
-    print(results)
-    return jsonify(results[0])
+ 
 
 if __name__=="__main__":
     app.run(host="0.0.0.0")        

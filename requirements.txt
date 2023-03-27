@@ -8,4 +8,5 @@ xgboost
 catboost
 pickel
 flask
+awsebcli
 -e .
